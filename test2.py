@@ -14,6 +14,22 @@ class Incorrect(unittest.TestCase):
         self.driver.implicitly_wait(30)
         self.verificationErrors = []
         self.accept_next_alert = True
+        
+        
+     
+    def test_incorrect(self):
+        driver = self.driver
+        driver.get( "https://media.prod.mdn.mozit.cloud/attachments/2012/07/09/3698/391aef19653595a663cc601c42a67116/image_upload_preview.html?myPhoto=exams.jpg")
+        time.sleep(5)
+        self.assertIn("media", driver.current_url)
+        el = driver.find_element_by_id("uploadImage")
+        time.sleep(5)
+        el.send_keys("/Users/tamerjar/Desktop/exams/IMG_2592.HEIC")
+        time.sleep(3)
+        self.assertEqual("You must select a valid image file!", self.close_alert_and_get_its_text())
+        driver.save_screenshot("/Users/tamerjar/Desktop/exams/screenshot.png")
+        time.sleep(5)
+        driver.find_element_by_xpath("//input[@value='Send']").click()
 
         
 
